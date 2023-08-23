@@ -1,81 +1,112 @@
-const constants = require("../models/contacts");
+const { Contact, schema } = require("../models/ContactsModel");
+const asyncHandler = require("express-async-handler");
+const { addContactShema } = require("../schema/validateContent");
+class Contacts {
+  listCotntacts = asyncHandler(async (req, res) => {
+    const contacts = await Contact.find({}, "-createdAt -updatedAt");
+    res.status(200).json({
+      code: 200,
+      message: "success",
+      data: contacts,
+    });
+  });
 
-const { HttpError } = require("../utils/index");
-const { addContactShema } = require("../schema/index");
-
-const listCotntacts = async (req, res, next) => {
-  try {
-    const result = await constants.listContacts();
-    res.status(200).json(result);
-  } catch (error) {
-    next(error);
-  }
-};
-
-const getContactById = async (req, res, next) => {
-  try {
-    const { contactId } = req.params;
-    const result = await constants.getContactById(contactId);
-    if (!result) {
-      throw HttpError(404, "Not Found");
-    }
-    res.status(200).json(result);
-  } catch (error) {
-    next(error);
-  }
-};
-
-const addContact = async (req, res, next) => {
-  try {
-    const { error } = addContactShema.validate(req.body);
-    if (error) {
-      throw HttpError(400, error.message);
-    }
-    const body = req.body;
-    const result = await constants.addContact(body);
-    res.status(201).json(result);
-  } catch (error) {
-    next(error);
-  }
-};
-
-const removeContact = async (req, res, next) => {
-  try {
-    const { contactId } = req.params;
-    const result = await constants.removeContact(contactId);
-    if (!result) {
-      return HttpError(400, "Not Found");
+  getContactById = asyncHandler(async (req, res) => {
+    const contact = await Contact.findById(
+      req.params.id,
+      "-createdAt -updatedAt"
+    );
+    if (!contact) {
+      res.status(404);
+      throw new Error(`Contact with id ${id} not found`);
     }
     res.status(200).json({
-      message: "Contact deleted",
+      code: 200,
+      message: "success",
+      data: contact,
     });
-  } catch (error) {
-    next(error);
-  }
-};
+  });
 
-const updateContact = async (req, res, next) => {
-  try {
-    const { error } = addContactShema.validate(req.body);
+  addContact = asyncHandler(async (req, res) => {
+    const { error } = schema.addAndUpdateContactSchema.validate(req.body);
     if (error) {
-      throw HttpError(400, (error.message = "missing fields"));
+      res.status(400);
+      console.log(`${error.message}`.red.bold);
+      throw new Error("Check the data you entered");
     }
-    const { contactId } = req.params;
-    const result = await constants.updateContact(contactId, req.body);
+    const contact = await Contact.create({
+      ...req.body,
+    });
+    res.status(201).json({
+      code: 201,
+      message: "success",
+      data: contact,
+    });
+  });
 
-    if (!result) {
-      throw HttpError(404, "Not Found");
+  removeContact = asyncHandler(async (req, res) => {
+    const contact = await Contact.findByIdAndRemove(req.params.id);
+    if (!contact) {
+      res.status(404);
+      throw new Error(`Contact with id ${id} not found`);
     }
-    res.json(result);
-  } catch (error) {
-    next(error);
-  }
-};
+    res.status(200).json({
+      code: 200,
+      message: "success",
+      data: contact,
+    });
+  });
 
-module.exports = {
-  listCotntacts,
-  getContactById,
-  addContact,
-  removeContact,
-  updateContact,
-};
+  updateContact = asyncHandler(async (req, res) => {
+    const contact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body },
+      { new: true }
+    );
+    if (!contact) {
+      res.status(404);
+      throw new Error(`Contact with id ${id} not found`);
+    }
+
+    const { error } = schema.addAndUpdateContactSchema.validate(req.body);
+    if (error) {
+      res.status(400);
+      console.log(`${error.message}`.red.bold);
+      throw new Error("Check the data you entered");
+    }
+
+    res.status(200).json({
+      code: 200,
+      message: "success",
+      data: contact,
+    });
+  });
+
+  favorite = asyncHandler(async (req, res) => {
+    const contact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body },
+      { new: true }
+    );
+    if (!contact) {
+      res.status(404);
+      throw new Error(`Contact with id ${id} not found`);
+    }
+
+    const { error } = schema.updateFavoriteContactSchema.validate(req.body);
+
+    if (error) {
+      res.status(400);
+      console.log(`${error.message}`.red.bold);
+      throw new Error(`${error.message}`);
+    }
+
+    res.status(200).json({
+      code: 200,
+      message: "success",
+      data: contact,
+    });
+  });
+}
+
+module.exports = new Contacts();
