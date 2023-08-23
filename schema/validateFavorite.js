@@ -7,17 +7,4 @@ const validateFavorite = Joi.object({
   }),
 });
 
-validateFavorite.withCustomMessages = function (data) {
-  const result = this.validate(data);
-
-  if (result.error) {
-    const errorMessage = result.error.details
-      .map((detail) => detail.message)
-      .join(", ");
-    console.error("Validation error:", errorMessage);
-  }
-
-  return result;
-};
-
 module.exports = validateFavorite;
