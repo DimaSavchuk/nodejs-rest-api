@@ -29,4 +29,4 @@ const schema = {
   updateFavoriteContactSchema,
 };
 
-module.exports = module.exports = { Contact, schema };
+module.exports = { Contact, schema };
