@@ -1,5 +1,7 @@
-const addContactShema = require("./validate");
+const validateContent = require("./validateContent");
+const validateFavorite = require("./validateFavorite");
 
 module.exports = {
-  addContactShema,
+  validateContent,
+  validateFavorite,
 };
