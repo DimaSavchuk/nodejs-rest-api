@@ -1,4 +1,6 @@
-const { Contact, schema } = require("../../models/ContactsModel");
+const { ContactsModel } = require("../../models");
+const { Contact, schema } = ContactsModel;
+
 const asyncHandler = require("express-async-handler");
 
 const favorite = asyncHandler(async (req, res) => {

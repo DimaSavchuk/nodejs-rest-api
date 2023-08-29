@@ -1,4 +1,6 @@
-const { Contact, schema } = require("../../models/ContactsModel");
+const { ContactsModel } = require("../../models");
+const { Contact, schema } = ContactsModel;
+
 const asyncHandler = require("express-async-handler");
 
 const addContact = asyncHandler(async (req, res) => {
@@ -8,8 +10,10 @@ const addContact = asyncHandler(async (req, res) => {
     console.log(`${error.message}`.red.bold);
     throw new Error("Check the data you entered");
   }
+  const { _id: owner } = req.user;
   const contact = await Contact.create({
     ...req.body,
+    owner,
   });
   res.status(201).json({
     code: 201,

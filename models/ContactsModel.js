@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 
-const { validateContent, validateFavorite } = require("../schema/index");
+const { contacts } = require("../schema");
+const validate = contacts;
 
 const contactsSchema = new Schema({
   name: {
@@ -17,12 +18,16 @@ const contactsSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+  },
 });
 
 const Contact = model("contacts", contactsSchema);
 
-const addAndUpdateContactSchema = validateContent;
-const updateFavoriteContactSchema = validateFavorite;
+const addAndUpdateContactSchema = validate.validateContent;
+const updateFavoriteContactSchema = validate.validateFavorite;
 
 const schema = {
   addAndUpdateContactSchema,
