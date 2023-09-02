@@ -1,7 +1,7 @@
-const validateContent = require("./validateContent");
-const validateFavorite = require("./validateFavorite");
+const contacts = require("./contacts");
+const auth = require("./auth");
 
 module.exports = {
-  validateContent,
-  validateFavorite,
+  contacts,
+  auth,
 };

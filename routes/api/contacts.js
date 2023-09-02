@@ -5,11 +5,23 @@ const {
   contactsControllers: crtlContacts,
 } = require("../../controllers/index");
 
-contactRouter.get("/contacts", crtlContacts.addContact);
-contactRouter.get("/contacts/:id", isValidId, crtlContacts.getContactById);
-contactRouter.post("/contacts", crtlContacts.addContact);
-contactRouter.delete("/contacts/:id", isValidId, crtlContacts.removeContact);
-contactRouter.put("/contacts/:id", isValidId, crtlContacts.updateContact);
-contactRouter.patch("/contacts/:id/favorite", isValidId, crtlContacts.favorite);
+const authenticate = require("../../middlewares/authenticate");
+
+contactRouter.get("/", authenticate, crtlContacts.listContacts);
+contactRouter.get("/:id", authenticate, isValidId, crtlContacts.getContactById);
+contactRouter.post("/", authenticate, crtlContacts.addContact);
+contactRouter.delete(
+  "/:id",
+  authenticate,
+  isValidId,
+  crtlContacts.removeContact
+);
+contactRouter.put("/:id", authenticate, isValidId, crtlContacts.updateContact);
+contactRouter.patch(
+  "/:id/favorite",
+  authenticate,
+  isValidId,
+  crtlContacts.favorite
+);
 
 module.exports = contactRouter;
