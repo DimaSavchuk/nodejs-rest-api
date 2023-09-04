@@ -1,6 +1,9 @@
 const app = require("./app");
 const path = require("path");
 
+// const tempPath = require("./middlewares/upload");
+// console.log("test -> ", tempPath);
+
 const configPath = path.join(__dirname, "config", ".env");
 
 require("colors");
