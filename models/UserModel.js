@@ -20,6 +20,14 @@ const usersSchema = new Schema({
   },
   token: String,
   avatarURL: String,
+  verify: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+    required: [true, "Verify token is required"],
+  },
 });
 
 const User = model("user", usersSchema);
@@ -27,11 +35,13 @@ const User = model("user", usersSchema);
 const registerSchema = validate.register;
 const loginSchema = validate.login;
 const subscriptionSchema = validate.subscription;
+const reverifySchema = validate.reverify;
 
 const schema = {
   registerSchema,
   loginSchema,
   subscriptionSchema,
+  reverifySchema,
 };
 
 module.exports = { User, schema };

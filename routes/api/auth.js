@@ -16,5 +16,7 @@ authRouter.patch(
   upload.single("avatar"),
   authControllers.avatarUpdate
 );
+authRouter.get("/verify/:verificationToken", authControllers.verify);
+authRouter.post("/verify", authControllers.reverify);
 
 module.exports = authRouter;
