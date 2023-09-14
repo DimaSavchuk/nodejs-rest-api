@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const { schema, User } = require("../../models/UserModel");
-const sendEmail = require("../../helpers/sendEmail");
+const sendEmail = require("../../services/email");
 
 const { BASE_URL } = process.env;
 

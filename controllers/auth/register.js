@@ -4,7 +4,7 @@ const { nanoid } = require("nanoid");
 
 const asyncHandler = require("express-async-handler");
 const { User, schema } = require("../../models/UserModel");
-const sendEmail = require("../../helpers/sendEmail");
+const sendEmail = require("../../services/email/sendEmail");
 
 const { BASE_URL } = process.env;
 
