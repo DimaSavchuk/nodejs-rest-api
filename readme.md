@@ -22,4 +22,4 @@ DOMAIN_NAME=
 * Запустіть локальний сервер за допомогою команди ``` npm run start:dev``` / Start the local server using the command ```npm run start:dev```
 * Перевірити роботу запитів ви можете за допомогою `Postman`, для перевірки запитів / You can check the operation of requests using `Postman`, to check requests
 
-
+Ознайомитись із документацією ви можете перейшовши по [посилання](https://documenter.getpostman.com/view/27051610/2s9YXh73cB) / You can get acquainted with the documentation by following [link](https://documenter.getpostman.com/view/27051610/2s9YXh73cB)
