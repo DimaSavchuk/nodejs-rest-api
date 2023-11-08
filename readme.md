@@ -1,31 +1,25 @@
-## GoIT Node.js Course Template Homework
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Nodemon](https://img.shields.io/badge/NODEMON-%23323330.svg?style=for-the-badge&logo=nodemon&logoColor=%BBDEAD) ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 
-Виконайте форк цього репозиторію для виконання домашніх завдань (2-6)
-Форк створить репозиторій на вашому http://github.com
+# CONTACTS API
 
-Додайте ментора до колаборації
+Серверне апі для зберігання інформації про користувачів, із можливістю реєстрації та авторизації. / Server app for storing information about users, with the possibility of registration and authorisation.
 
-Для кожної домашньої роботи створюйте свою гілку.
+## Встановлення та запуск / Get it up and running
+* Переконайся, що на комп'ютері встановлена LTS-версія Node.js та MongoDB. / Make sure you have the LTS version of Node.js and MongoDB installed on your computer.
+* Встановіть базові залежності проекту командою ```npm install``` / Install the basic project dependencies with the command ```npm install```
+* Створіть базу даних MongoDB та налаштуйте налаштуйте її. / Create a MongoDB database and configure it.
+* Створіть файл ```env.``` у папці config та налаштуйте його / Create the ```env.``` file in the config folder and configure it: 
+```    
+Приклад налаштування / Example of setting up
 
-- hw02
-- hw03
-- hw04
-- hw05
-- hw06
+DB_URL=
+PORT=
+SECRET_KEY=
+MAILGUN_API_KYE=
+BASE_URL=
+DOMAIN_NAME=
+```
+* Запустіть локальний сервер за допомогою команди ``` npm run start:dev``` / Start the local server using the command ```npm run start:dev```
+* Перевірити роботу запитів ви можете за допомогою `Postman`, для перевірки запитів / You can check the operation of requests using `Postman`, to check requests
 
-Кожна нова гілка для др повинна робитися з master
 
-Після того, як ви закінчили виконувати домашнє завдання у своїй гілці, необхідно зробити пулл-реквест (PR). Потім додати ментора для рев'ю коду. Тільки після того, як ментор заапрувить PR, ви можете виконати мердж гілки з домашнім завданням у майстер.
-
-Уважно читайте коментарі ментора. Виправте зауваження та зробіть коміт у гілці з домашнім завданням. Зміни підтягнуться у PR автоматично після того, як ви відправите коміт з виправленнями на github
-Після виправлення знову додайте ментора на рев'ю коду.
-
-- При здачі домашньої роботи є посилання на PR
-- JS-код чистий та зрозумілий, для форматування використовується Prettier
-
-### Команди:
-
-- `npm start` &mdash; старт сервера в режимі production
-- `npm run start:dev` &mdash; старт сервера в режимі розробки (development)
-- `npm run lint` &mdash; запустити виконання перевірки коду з eslint, необхідно виконувати перед кожним PR та виправляти всі помилки лінтера
-- `npm lint:fix` &mdash; та ж перевірка лінтера, але з автоматичними виправленнями простих помилок
